@@ -39,6 +39,7 @@ class BasePage:
     def find_elements_by_xpath(self, xpath):
         return self.driver.find_elements_by_xpath(xpath)
 
-    def click(self, elm: WebElement, _sleep=1):
+    @staticmethod
+    def click(elm: WebElement, _sleep=1):
         time.sleep(_sleep)
         elm.click()

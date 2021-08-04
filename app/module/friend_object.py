@@ -1,7 +1,6 @@
 """
     交友页面
 """
-import time
 
 import allure
 
