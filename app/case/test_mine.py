@@ -3,9 +3,10 @@ import allure
 from app.module.mine_object import MinePage
 
 
-@allure.story('进入主页')
+@allure.story('我的页面')
 class TestMinePage:
 
-    @allure.title('进入主页成功')
-    def test_goto_mine(self, driver):
-        MinePage(driver).go_to_mine()
+    @allure.title('进入等级页面')
+    def test_goto_level(self, driver):
+        MinePage(driver).goto_mine()
+        MinePage(driver).goto_level()

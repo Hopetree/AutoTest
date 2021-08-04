@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from appium import webdriver
 
@@ -26,4 +28,5 @@ def driver(des_caps):
     # 设置查找元素的超时时间
     driver.implicitly_wait(10)
     yield driver
+    time.sleep(5)
     driver.quit()
