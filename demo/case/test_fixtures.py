@@ -1,15 +1,16 @@
 import pytest
 import allure
 
+lis = []
+
 
 @pytest.fixture(scope='module')
 def func_module():
     with allure.step(" ---- scope=module 每个.py文件开始前执行一次 ----- "):
-        lis = ['module start']
+        lis.append('module start')
     yield lis
     with allure.step(" ---- scope=module 每个.py文件结束后执行一次 ----- "):
         lis.append('module end')
-        print(lis)
 
 
 @pytest.fixture(scope='class')
@@ -34,13 +35,13 @@ def func_function(func_module):
 @allure.link('https://docs.pytest.org/en/latest/how-to/fixtures.html#yield-fixtures-recommended')
 class TestCase:
 
+    @allure.title('fixture 函数执行顺序')
     def test_01(self, func_function, func_class):
-        print('ok')
-        assert 1 == 1
+        assert lis == ['module start', 'class start', 'func start']
 
+    @allure.title('fixture 函数执行顺序')
     def test_02(self, func_function, func_class):
-        print('ok')
-        assert 1 == 1
+        assert lis == ['module start', 'class start', 'func start', 'func end', 'func start']
 
 
 if __name__ == '__main__':

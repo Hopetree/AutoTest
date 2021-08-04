@@ -1,4 +1,5 @@
 import pytest
+from appium import webdriver
 
 
 @pytest.fixture(scope='session')
@@ -17,3 +18,12 @@ def des_caps():
         'resetKeyboard': True,
     }
     return caps
+
+
+@pytest.fixture(scope='class')
+def driver(des_caps):
+    driver = webdriver.Remote('http://192.168.31.13:4723/wd/hub', des_caps)
+    # 设置查找元素的超时时间
+    driver.implicitly_wait(10)
+    yield driver
+    driver.quit()

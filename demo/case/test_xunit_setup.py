@@ -15,7 +15,6 @@ def setup_module():
 @allure.step(" ---- teardown_module 整个.py文件结束时执行一次 ----- ")
 def teardown_module():
     lis.append('teardown_module')
-    print(lis)
 
 
 @allure.story('测试xunit方法')
@@ -47,8 +46,9 @@ class TestCase:
     def teardown(self):
         lis.append('teardown')
 
+    @allure.title('xunit 函数执行顺序')
     def test_001(self):
-        assert 1 == 1
+        assert lis == ['setup_module', 'setup_class', 'setup_method', 'setup']
 
 
 if __name__ == "__main__":
