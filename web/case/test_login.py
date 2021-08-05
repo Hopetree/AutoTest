@@ -1,21 +1,17 @@
-import pytest
 import allure
-from selenium import webdriver
+import pytest
 
+from common.readdata import YamlData
 from web.module.logino_bject import LoginPage
+
+user_data = YamlData('data/user.yaml').parametrize_data
 
 
 @allure.story('登录页面')
 class TestLoginPage:
-    driver = webdriver.Chrome('/Users/leizhu/Documents/Mac/chrome_extensions/chromedriver')
 
-    @pytest.fixture(scope='class')
-    def close_driver(self):
-        yield
-        with allure.step('测试类结束，关闭浏览器'):
-            self.driver.close()
-
-    @pytest.mark.parametrize('username, password', [('user01', 'password'), ('admin', 'password')])
+    @pytest.mark.parametrize(*user_data)
     @allure.title('测试多组账号密码登录')
-    def test_login(self, close_driver, username, password):
-        LoginPage(self.driver).login(username, password)
+    def test_login(self, driver, username, password, code):
+        LoginPage(driver).login(username, password)
+        assert ('login' in driver.current_url) == code

@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import allure
 
@@ -21,9 +23,6 @@ class TestConftest:
         config['driver'] = 'driver'
         lis.append('set_config')
 
-    def test_get_version(self, config):
-        assert config['version'] == '0.1.0'
-
     @pytest.mark.xfail
     @allure.title('直接设置类属性不成功')
     @allure.description('设置类的属性不成功')
@@ -37,3 +36,7 @@ class TestConftest:
     @allure.title('设置外部属性成功')
     def test_autouse(self):
         assert 'set_config' in lis
+
+    @allure.title('测试通过conftest设置环境变量')
+    def test_get_env(self):
+        assert os.getenv('env') == '211'
