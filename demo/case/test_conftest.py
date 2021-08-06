@@ -23,9 +23,9 @@ class TestConftest:
         config['driver'] = 'driver'
         lis.append('set_config')
 
-    @pytest.mark.xfail
     @allure.title('直接设置类属性不成功')
     @allure.description('设置类的属性不成功')
+    @pytest.mark.xfail
     def test_set_self(self):
         assert self.driver == 'driver'
 
@@ -40,3 +40,11 @@ class TestConftest:
     @allure.title('测试通过conftest设置环境变量')
     def test_get_env(self):
         assert os.getenv('env') == '211'
+
+
+@allure.story('conftest用法')
+@pytest.mark.usefixtures('cls_init')
+class Test:
+    @allure.title('usefixtures用法，给类添加属性')
+    def test_usefixtures(self):
+        assert self.name == 'test'

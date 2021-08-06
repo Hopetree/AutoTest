@@ -5,6 +5,8 @@
 3. 将环境变量写入到allure的环境变量文件中
 """
 import os
+
+import allure
 import pytest
 
 from common.utils import BASE_DIR
@@ -20,6 +22,7 @@ def pytest_addoption(parser):
     )
 
 
+@allure.title('设置环境变量')
 @pytest.fixture(scope="session", autouse=True)
 def set_env(request):
     # 定义一个字典，按照键值对写入环境变量中，只需要在这里追加要设置的环境变量即可

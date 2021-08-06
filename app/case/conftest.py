@@ -1,5 +1,6 @@
 import time
 
+import allure
 import pytest
 from appium import webdriver
 
@@ -22,11 +23,13 @@ def des_caps():
     return caps
 
 
+@allure.title('给测试类添加driver属性')
 @pytest.fixture(scope='class')
-def driver(des_caps):
+def driver_init(request, des_caps):
     driver = webdriver.Remote('http://192.168.31.13:4723/wd/hub', des_caps)
     # 设置查找元素的超时时间
     driver.implicitly_wait(10)
-    yield driver
+    request.cls.driver = driver
+    yield
     time.sleep(5)
     driver.quit()
