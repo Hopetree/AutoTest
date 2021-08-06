@@ -31,6 +31,8 @@ def func_function(func_module):
         func_module.append('func end')
 
 
+@allure.epic('pytest用法')
+@allure.feature('fixtures模块')
 @allure.story('测试fixtures用法')
 @allure.link('https://docs.pytest.org/en/latest/how-to/fixtures.html#yield-fixtures-recommended')
 class TestCase:

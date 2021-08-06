@@ -12,6 +12,8 @@ def config(conf):
 lis = []
 
 
+@allure.epic('pytest用法')
+@allure.feature('conftest模块')
 @allure.story('conftest用法')
 class TestConftest:
     driver = None
@@ -42,6 +44,8 @@ class TestConftest:
         assert os.getenv('env') == '211'
 
 
+@allure.epic('pytest用法')
+@allure.feature('conftest模块')
 @allure.story('conftest用法')
 @pytest.mark.usefixtures('cls_init')
 class Test:

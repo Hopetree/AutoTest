@@ -17,6 +17,8 @@ def teardown_module():
     lis.append('teardown_module')
 
 
+@allure.epic('pytest用法')
+@allure.feature('xunit方法模块')
 @allure.story('测试xunit方法')
 @allure.link('https://docs.pytest.org/en/latest/how-to/xunit_setup.html')
 class TestCase:
