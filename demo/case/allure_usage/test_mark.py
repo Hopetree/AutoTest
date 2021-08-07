@@ -1,6 +1,8 @@
 import allure
 import pytest
 
+from common.logger import logger
+
 
 @pytest.fixture(scope="session")
 def login_fixture():
@@ -47,6 +49,7 @@ class TestAllure:
 class TestAllure2:
     @allure.story("story效果")
     def test_case_3(self, login_fixture):
+        logger.info('测试多个步骤')
         step_1()
         step_3()
 

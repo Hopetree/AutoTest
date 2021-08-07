@@ -16,7 +16,7 @@ class FriendPage(BasePage):
     @allure.step('从主页进入交友页面')
     def goto_friend(self):
         elm = self.find_element_by_id(self.friend_id)
-        self.click(elm)
+        self.click(elm, 2)
 
     @allure.step('关闭交友页面提示弹框')
     def close_dialog(self):

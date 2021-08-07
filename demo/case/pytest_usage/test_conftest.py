@@ -5,7 +5,10 @@ import allure
 
 
 @pytest.fixture(scope='class')
-def config(conf):
+def config():
+    conf = {
+        "version": "0.1.0"
+    }
     yield conf
 
 

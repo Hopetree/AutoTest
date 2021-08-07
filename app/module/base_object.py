@@ -43,3 +43,4 @@ class BasePage:
     def click(elm: WebElement, _sleep=1):
         time.sleep(_sleep)
         elm.click()
+        time.sleep(_sleep)

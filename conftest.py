@@ -9,7 +9,8 @@ import os
 import allure
 import pytest
 
-from common.utils import BASE_DIR
+from common.config_load import ConfigYaml
+from settings import BASE_DIR
 
 
 def pytest_addoption(parser):
@@ -38,3 +39,11 @@ def set_env(request):
             f.write(f'{_k}={value}')
             # 将命令行传参写入环境变量中，方便用例调用
             os.environ[_k] = value
+
+
+@allure.title('根据传入的env环境参数设置配置信息config')
+@pytest.fixture(scope='session')
+def config(request):
+    _env = request.config.getoption('--env')
+    _config = ConfigYaml(_env).get_config()
+    yield _config

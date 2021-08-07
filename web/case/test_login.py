@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-from common.read_data import YamlData
+from common.data_load import YamlData
 from web.module.login_object import LoginPage
 
 user_data = YamlData('data/user.yaml').parametrize_data

@@ -2,7 +2,15 @@ import os
 
 import yaml
 
-from common.utils import BASE_DIR
+from settings import BASE_DIR
+
+
+class YamlLoad:
+    @staticmethod
+    def load_data(filepath):
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = yaml.safe_load(f)
+        return content
 
 
 class DataTool:
@@ -26,7 +34,7 @@ class DataTool:
         return dic.get(key)
 
 
-class YamlData(DataTool):
+class YamlData(YamlLoad, DataTool):
     def __init__(self, filepath, base_dir=BASE_DIR):
         # 默认从项目根目录开始读取文件
         self.filepath = os.path.join(base_dir, filepath)
@@ -37,9 +45,7 @@ class YamlData(DataTool):
         读取yaml文件的内容并返回
         :return:
         """
-        with open(self.filepath, 'r', encoding='utf-8') as f:
-            content = yaml.safe_load(f.read())
-        return content
+        return self.load_data(self.filepath)
 
     @property
     def parametrize_data(self):

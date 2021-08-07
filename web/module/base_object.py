@@ -3,16 +3,19 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
+from common.logger import logger
+
 
 class BasePage:
 
-    def __init__(self, driver: WebDriver, timeout=5):
+    def __init__(self, driver: WebDriver, timeout=10):
         self.driver = driver
         self.waiter = WebDriverWait(self.driver, timeout)
 
     # 访问URL
     def get(self, url):
         self.driver.get(url)
+        logger.debug(f'访问{url}')
 
     # 元素定位
     def find_element(self, loc, is_wait=False):
@@ -40,9 +43,34 @@ class BasePage:
     def wait(t):
         time.sleep(t)
 
-    # 关闭
-    def quite(self):
-        self.driver.quit()
+    def back(self):
+        """网页后退"""
+        self.driver.back()
+        logger.debug('网页后退')
 
+    def forward(self):
+        """网页前进"""
+        self.driver.forward()
+        logger.debug('网页前进')
+
+    def refresh(self):
+        """网页刷新"""
+        self.driver.refresh()
+        logger.debug('网页刷新')
+
+    def get_current_url(self):
+        """获取当前页面的URL"""
+        return self.driver.current_url
+
+    # 关闭
     def close(self):
-        self.driver.close()
+        """关闭当前页面"""
+        if self.driver:
+            self.driver.close()
+        logger.debug(f'关闭当前页面')
+
+    def quite(self):
+        """关闭所有页面，退出浏览器"""
+        if self.driver:
+            self.driver.quit()
+        logger.debug('退出浏览器')
