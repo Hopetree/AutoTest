@@ -1,0 +1,7 @@
+---
+# 基本变量，所有环境通用
+# 谷歌浏览器插件路径
+executable_path:
+  chrome: /Users/leizhu/Documents/Mac/chrome_extensions/chromedriver_mac_arm64/chromedriver
+app_name: 映客直播
+appPackage: com.meelive.ingkee

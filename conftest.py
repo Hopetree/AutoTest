@@ -17,7 +17,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--env",
         action="store",
-        default='211',
+        default='dev',
         type=str,
         help="assign which env to use",
     )
